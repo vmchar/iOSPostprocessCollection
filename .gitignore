@@ -1,0 +1,22 @@
+*.*~
+*.db
+*.sln
+*.userprefs
+*.csproj
+*.pidb
+*.unityproj
+*.apk
+.vs/
+Postprocess Collection/Library
+Postprocess Collection/obj
+Postprocess Collection/Temp
+Postprocess Collection/Build
+Postprocess Collection/ProjDocs
+Postprocess Collection/Build*
+Postprocess Collection/AssetBundles
+*.stackdump
+.idea/
+Postprocess Collection/Logs/*
+Postprocess Collection/Assets/plugins/Editor/JetBrains*
+Postprocess Collection/Assets/plugins/GitHub*
+Postprocess Collection/Logs/

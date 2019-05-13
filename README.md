@@ -13,7 +13,7 @@ What actions does this package can help you to do with the XCode project:
 5. Add Entitlements file to project (project capabilities)
 6. Replace Xcode's app delegate file to your custom one (rarely required but sometimes saves your life. Essential in situations when you need to modify app's delegate, but one or several 3rd party plugins are already doing it).
 
-## Integration.
+## Integration
 This plugin is distributed via source code. You can simply download PostProcessCollection.unitypackage from this repo. Then follow these steps:
 1. Import PostProcessCollection.unitypackage in your project
 2. RMB click in you Project view in Unity and select Create -> XCode Modification or select Assets -> Create -> XCode Modification

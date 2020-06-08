@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿#if UNITY_EDITOR && UNITY_IOS
+
 using UnityEditor;
-using UnityEditor.iOS.Xcode;
-using UnityEngine;
 
 namespace PostprocessCollection
 {
@@ -25,3 +23,5 @@ namespace PostprocessCollection
         }
     }
 }
+
+#endif

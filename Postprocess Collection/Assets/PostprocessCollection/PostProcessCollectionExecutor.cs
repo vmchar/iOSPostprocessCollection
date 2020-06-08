@@ -1,4 +1,4 @@
-﻿#if UNITY_IOS
+﻿#if UNITY_IOS && UNITY_EDITOR
 
 using System.IO;
 using UnityEditor;
@@ -13,19 +13,16 @@ namespace PostprocessCollection
     /// Hold the setting scriptable object and
     /// starts all the other postprocess actions.
     /// </summary>
-    public class PostProcessCollectionExecutor : ScriptableObject
+    public class PostProcessCollectionExecutor
     {
         public CustomXcodeProjectModifications XcodeModificationsScriptableObject;
 
         [PostProcessBuild(999)]
         public static void OnPostprocessBuild(BuildTarget buildTarget, string path)
         {
-            var dummy = CreateInstance<PostProcessCollectionExecutor>();
-            if (dummy.XcodeModificationsScriptableObject == null)
-                return;
-
-            var xcodeModifications = dummy.XcodeModificationsScriptableObject;
-
+            var xcodeModifications = FindModification();
+            if(xcodeModifications == null)
+                Debug.LogError("PostProcessCollection error: Custom Xcode modification file with name 'MainXcodeModification' not found");
             var projectPath = path + "/Unity-iPhone.xcodeproj/project.pbxproj";
             var project = new PBXProject();
             project.ReadFromString(File.ReadAllText(projectPath));
@@ -36,7 +33,6 @@ namespace PostprocessCollection
             var plist = new PlistDocument();
             plist.ReadFromFile(plistPath);
             
-
             AddFrameworksPostprocess.AddFrameworks(project, target, xcodeModifications.Frameworks);
             ProjectPropertyPostprocess.AddProperty(project, target, xcodeModifications.Flags);
             AddPropertiesPostprocess.AddProperties(plist, xcodeModifications.PlistKeys);
@@ -47,8 +43,21 @@ namespace PostprocessCollection
             project.WriteToFile(projectPath);
             File.WriteAllText(projectPath, project.WriteToString());
             File.WriteAllText(plistPath, plist.WriteToString());
+        }
 
-            DestroyImmediate(dummy);
+        public static CustomXcodeProjectModifications FindModification()
+        {
+            var result = AssetDatabase.FindAssets("t:CustomXcodeProjectModifications");
+            foreach (var s in result)
+            {
+                var assetPath = AssetDatabase.GUIDToAssetPath(s);
+                if (assetPath.Contains("MainXcodeModification.asset"))
+                {
+                    return (CustomXcodeProjectModifications) AssetDatabase.LoadAssetAtPath
+                            (AssetDatabase.GUIDToAssetPath(s), typeof(CustomXcodeProjectModifications));
+                }
+            }
+            return null;
         }
     }
 }

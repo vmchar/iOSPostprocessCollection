@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿#if UNITY_IOS && UNITY_EDITOR
+
+using System.IO;
 using UnityEditor;
 using UnityEditor.iOS.Xcode;
 
@@ -24,3 +26,5 @@ namespace PostprocessCollection
         }
     }
 }
+
+#endif

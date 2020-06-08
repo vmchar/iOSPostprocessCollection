@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿#if UNITY_IOS && UNITY_EDITOR
+
+using System.Collections.Generic;
 using UnityEditor.iOS.Xcode;
 
 namespace PostprocessCollection
@@ -13,22 +15,6 @@ namespace PostprocessCollection
     /// </summary>
     public static class ProjectPropertyPostprocess //: MonoBehaviour
     {
-//    [PostProcessBuild(700)]
-//    public static void OnPostProcessBuild(BuildTarget target, string pathToBuiltProject)
-//    {
-//        if (target != BuildTarget.iOS)
-//        {
-//            return;
-//        }
-// 
-//        string projPath = pathToBuiltProject + "/Unity-iPhone.xcodeproj/project.pbxproj";
-//        PBXProject proj = new PBXProject();
-//        proj.ReadFromString(File.ReadAllText(projPath));
-//        string targetGUID = proj.TargetGuidByName("Unity-iPhone");
-//        proj.AddBuildProperty(targetGUID, "OTHER_LDFLAGS", "-lxml2"); 
-//        File.WriteAllText(projPath, proj.WriteToString());
-//    }
-
         public static void AddProperty(PBXProject proj, string targetGUID, List<BuildProperties> properties)
         {
             if(properties == null) return;
@@ -39,3 +25,5 @@ namespace PostprocessCollection
         }
     }
 }
+
+#endif

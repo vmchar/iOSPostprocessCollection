@@ -18,8 +18,8 @@ This plugin is distributed via source code. You can simply download PostProcessC
 1. Import PostProcessCollection.unitypackage in your project
 2. RMB click in you Project view in Unity and select Create -> XCode Modification or select Assets -> Create -> XCode Modification
 3. A new instance of Scriptable Object with New_XCode_Modification name will be created.
-4. You can name this SO as you wish. You can now enter needed values to this SO. This will describe modifications which will be performed on XCode project.
-5. Locate and select script called PostProcessCollectionExecutor in inspector.
-6. Drag & Drop your XCode Modification SO file into PostProcessCollectionExecutor inspector's field called "Xcode Modifications Scriptable Object"
+4. You should name it MainXcodeModification in order to make scripts able to find it prgrammatically. 
+5. Enter needed values to this SO. This will describe modifications that will be performed on XCode project.
+6. If there is no file "MainXcodeModification.asset" found in your project - an error will be shown during build process (PostProcessCollection error: Custom Xcode modification file with name 'MainXcodeModification' not found)).
 
-When the steps below are done, set up is complete.
+When the steps below are done, set up is complete. All XCode project modifications described in your MainXcodeModification.asset will be applied to XCode project during building your app. No extra steps reqiured.

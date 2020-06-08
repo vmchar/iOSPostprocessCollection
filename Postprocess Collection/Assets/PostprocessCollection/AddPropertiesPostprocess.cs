@@ -1,4 +1,6 @@
-﻿using UnityEditor.iOS.Xcode;
+﻿#if UNITY_IOS && UNITY_EDITOR
+
+using UnityEditor.iOS.Xcode;
 
 namespace PostprocessCollection
 {
@@ -44,3 +46,5 @@ namespace PostprocessCollection
        
     }
 }
+
+#endif
